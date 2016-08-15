@@ -1,0 +1,115 @@
+﻿<Window x:Name="Mang" x:Class="Mang.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Mang"
+        mc:Ignorable="d" 
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        Title="Mang Beta v1.0" Height="786" Width="773" WindowStartupLocation="CenterScreen" FontSize="18" FontWeight="Medium" ResizeMode="CanMinimize" Icon="icon.ico">
+  <Window.Resources>
+    <!--<Style TargetType="{x:Type ComboBox}">
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="{x:Type Grid}">
+      <Setter Property="Background">
+        <Setter.Value>
+          <LinearGradientBrush StartPoint="1, 1" EndPoint="0, 0">
+            <GradientStop Color="#002b36" Offset="0.0"/>
+            <GradientStop Color="#002b36" Offset="1.0"/>
+          </LinearGradientBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style TargetType="{x:Type Label}">
+      <Setter Property="Foreground" Value="#93a1a1"/>
+    </Style>
+    <Style TargetType="{x:Type TextBox}">
+      <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+      <Setter Property="Background" Value="#073642"/>
+      <Setter Property="Foreground" Value="#839496"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type TextBox}">
+            <Border x:Name="bg" BorderBrush="#657b83" BorderThickness="1">
+              <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="True" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" TargetName="bg" Value="#839496"/>
+                <Setter Property="BorderThickness" TargetName="bg" Value="1" />
+              </Trigger>
+              <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" TargetName="bg" Value="#839496"/>
+                <Setter Property="BorderThickness" TargetName="bg" Value="1" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>-->
+  </Window.Resources>
+  <Grid>
+    <materialDesign:Card Margin="0 0 0 0" Background="{DynamicResource PrimaryHueDarkBrush}"
+                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                         Padding="8" Height="220"/>
+    <Label x:Name="sourceLabel" Content="Source:" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" ToolTip="Language source"
+              Foreground="{DynamicResource PrimaryHueLightBrush}"/>
+    <ComboBox x:Name="nameSourceTypeCB" HorizontalAlignment="Left" Margin="160,20,0,0" VerticalAlignment="Top" Width="200" Loaded="NameSourceType_Loaded" SelectionChanged="NameSourceType_SelectionChanged" Height="40" MaxDropDownHeight="600" 
+              Background="{DynamicResource PrimaryHueDarkBrush}"
+              FontWeight="Normal"/>
+    <Label x:Name="typeLabel" Content="Type:" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" ToolTip="Region or general origin of the name type to be generated"
+              Foreground="{DynamicResource PrimaryHueLightBrush}"/>
+    <ComboBox x:Name="nameTypeCB" HorizontalAlignment="Left" Margin="160,80,0,0" VerticalAlignment="Top" Width="200" Loaded="NameType_Loaded" SelectionChanged="NameType_SelectionChanged" Height="40" 
+              Background="{DynamicResource PrimaryHueDarkBrush}"
+              FontWeight="Normal"/>
+    <Label x:Name="subTypeLabel" Content="Sub-Type:" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" ToolTip="Specific type of name to be generated"
+              Foreground="{DynamicResource PrimaryHueLightBrush}"/>
+    <ComboBox x:Name="nameSubTypeCB" HorizontalAlignment="Left" Margin="160,140,0,0" VerticalAlignment="Top" Width="200" Height="40" Loaded="NameSubType_Loaded" SelectionChanged="NameSubType_SelectionChanged" 
+              Background="{DynamicResource PrimaryHueDarkBrush}"
+              FontWeight="Normal"/>
+    <Label x:Name="orderLabel" Content="Order:" HorizontalAlignment="Left" Margin="440,140,0,0" VerticalAlignment="Top" ToolTip="N-gram length used in Markov chain"
+              Foreground="{DynamicResource PrimaryHueLightBrush}"/>
+    <ComboBox x:Name="orderCB" HorizontalAlignment="Left" Margin="600,140,0,0" VerticalAlignment="Top" Width="120" Loaded="OrderLength_Loaded" SelectionChanged="OrderLength_SelectionChanged" Height="40" 
+              Background="{DynamicResource PrimaryHueDarkBrush}"
+              FontWeight="Normal"/>
+    <Button x:Name="genFromPreset" HorizontalAlignment="Left" Margin="640,200,0,0" VerticalAlignment="Top" Width="40" Click="Preset_Click" BorderThickness="0" Height="40"
+            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+            ToolTip="Generate word list from dropdown parameters">
+      <StackPanel Orientation="Horizontal">
+        <materialDesign:PackIcon Kind="ArrowDownBoldCircleOutline" Height="24" Width="24" />
+      </StackPanel>
+    </Button>
+    <Label x:Name="inputLabel" Content="Markov Chain Input" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top"
+             Foreground="{DynamicResource SecondaryAccentBrush}"/>
+    <TextBox x:Name="markovInputBox" HorizontalAlignment="Left" Height="420" Margin="40,300,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="280" 
+             ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="16"/>
+    <Label x:Name="outputLabel" Content="Markov Chain Output" HorizontalAlignment="Left" Margin="440,260,0,0" VerticalAlignment="Top"
+           Foreground="{DynamicResource SecondaryAccentBrush}"/>
+    <TextBox x:Name="markovOutputBox" HorizontalAlignment="Left" Height="420" Margin="440,300,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="280" 
+    	ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="16" FontWeight="Normal"/>
+    <Button x:Name="inToOut" HorizontalAlignment="Left" Margin="360,405,0,0" VerticalAlignment="Top" Width="40" Height="40" BorderThickness="0" Click="UserInput_Click" 
+            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+            ToolTip="Generate word list from input box">
+      <StackPanel Orientation="Horizontal">
+        <materialDesign:PackIcon Kind="ArrowRightBoldCircleOutline" Height="24" Width="24" />
+      </StackPanel>
+    </Button>
+    <Button x:Name="infoButton" HorizontalAlignment="Left" Margin="680,15,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="Info_Click" Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+            ToolTip="Info">
+      <StackPanel Orientation="Horizontal">
+        <materialDesign:PackIcon Kind="InformationOutline" Width="24" Height="24"/>
+      </StackPanel>
+    </Button>
+    <Button x:Name="helpButton" HorizontalAlignment="Left" Margin="620,15,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="Help_Click" Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+            ToolTip="Help">
+      <StackPanel Orientation="Horizontal">
+        <materialDesign:PackIcon Kind="HelpCircleOutline" Width="24" Height="24"/>
+      </StackPanel>
+    </Button>
+
+  </Grid>
+</Window>
