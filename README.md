@@ -1,4 +1,4 @@
-# ${1:Project Name}
+# Mang
 Mang is "moddable" WPF app that uses Markov chains to generate a list of names. It's intended to be used for anyone from fantasy writers to D&D players who just want a name for an NPC.
 
 It is "moddable" in the sense that you, the user, can extend the input simply by creating a folder on your file system and dropping a text file (or any number of text files) containing names, and the app will automatically add that folder to the dropdown menu options so you can start generating names from your own input. Or, you can just paste your input directly into the window, and the app will generate output from that text.
