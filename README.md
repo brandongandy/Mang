@@ -3,7 +3,7 @@ Mang is "moddable" WPF app that uses Markov chains to generate a list of names. 
 
 It is "moddable" in the sense that you, the user, can extend the input simply by creating a folder on your file system and dropping a text file (or any number of text files) containing names, and the app will automatically add that folder to the dropdown menu options so you can start generating names from your own input. Or, you can just paste your input directly into the window, and the app will generate output from that text.
 ## Installation
-Download the source and compile
+Download the source and compile.
 ## Usage
 TODO: Write usage instructions
 ## Credits
@@ -16,7 +16,9 @@ donjon, which inspired me to make this tool.
 
 https://donjon.bin.sh/
 
-Icon by Freepik\nhttp://www.flaticon.com/authors/freepik  
+Icon by Freepik  
+http://www.flaticon.com/authors/freepik  
 Icon license Creative Commons BY 3.0  
+
 Material Design XAML Toolkit, for making this little app pretty:  
 http://materialdesigninxaml.net
