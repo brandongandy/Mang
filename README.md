@@ -8,7 +8,7 @@ Download the source and compile.
 TODO: Write usage instructions
 ## Credits
 Special thanks to:  
-Kate Monk's Onomastikon, a wonderful compilation of names from all around the world. In MaNG, many Medieval, Ancient World, and Aztec name sources were derived from this source, as well as the general layout of the menu structure. Please give this site a look.  
+Kate Monk's Onomastikon, a wonderful compilation of names from all around the world. In Mang, many Medieval, Ancient World, and Aztec name sources were derived from this source, as well as the general layout of the menu structure. Please give this site a look.  
 
 https://tekeli.li/onomastikon/index.html
 
