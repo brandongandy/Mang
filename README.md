@@ -5,7 +5,27 @@ It is "moddable" in the sense that you, the user, can extend the input simply by
 ## Installation
 Download the source and compile.
 ## Usage
-TODO: Write usage instructions
+### To Run:
+Open the project in your IDE of choice and build / compile, or download the source and run the Mang executable.
+
+To run the .exe outside of the project folder, these files/folders must be copied together into their own folder:
+* 0_1 (this folder and its sub-folders make up the content of the app all will be explained below)
+* Mang.exe
+* MaterialDesignColors.dll
+* MaterialDesignThemes.Wpf.dll
+
+### To Generate Names
+Mang parses through the folders and files found in `0_1` and uses the names of the folders to populate the dropdown menu items. Inside the lowest-level named folder is at least one text file (or could be several text files -- up to you!). Mang uses the contents of these text files to generate names.
+
+To add more dropdown menu items, simply make a new folder at the desired hierarchy level (explained below), then add a text file with enough contents to sensibly generate words from. For best results, it's recommended the file contains 100 items or more.
+
+You don't have to create multiple folders with names, either. You should be able to add a single top-level folder, name it, and select it as the top-most dropdown item, then you'll be able to generate names from there.
+
+Here are the buttons and what they mean / do:
+* __Source__: The regional "source" of the name types. This is the broadest separation of types that makes sense. Notice that a "region" doesn't necessarily mean a physical area; there is a Fantasy region by default.
+* __Type__: A sub-region; typically a sub-culture or culture within the top-level region. Or, different Fantasy worlds.
+* __Sub-Type__: Usually refers to male, female, God, Orc, Dwarf, etc.
+
 ## Credits
 Special thanks to:  
 Kate Monk's Onomastikon, a wonderful compilation of names from all around the world. In Mang, many Medieval, Ancient World, and Aztec name sources were derived from this source, as well as the general layout of the menu structure. Please give this site a look.  
