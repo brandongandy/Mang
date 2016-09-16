@@ -10,69 +10,27 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Mang Beta v1.0" Height="786" Width="773" WindowStartupLocation="CenterScreen" FontSize="18" FontWeight="Medium" ResizeMode="CanMinimize" Icon="icon.ico">
-  <Window.Resources>
-    <!--<Style TargetType="{x:Type ComboBox}">
-      <Setter Property="VerticalContentAlignment" Value="Center"/>
-    </Style>
-    <Style TargetType="{x:Type Grid}">
-      <Setter Property="Background">
-        <Setter.Value>
-          <LinearGradientBrush StartPoint="1, 1" EndPoint="0, 0">
-            <GradientStop Color="#002b36" Offset="0.0"/>
-            <GradientStop Color="#002b36" Offset="1.0"/>
-          </LinearGradientBrush>
-        </Setter.Value>
-      </Setter>
-    </Style>
-    <Style TargetType="{x:Type Label}">
-      <Setter Property="Foreground" Value="#93a1a1"/>
-    </Style>
-    <Style TargetType="{x:Type TextBox}">
-      <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-      <Setter Property="Background" Value="#073642"/>
-      <Setter Property="Foreground" Value="#839496"/>
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type TextBox}">
-            <Border x:Name="bg" BorderBrush="#657b83" BorderThickness="1">
-              <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="True" />
-            </Border>
-            <ControlTemplate.Triggers>
-              <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" TargetName="bg" Value="#839496"/>
-                <Setter Property="BorderThickness" TargetName="bg" Value="1" />
-              </Trigger>
-              <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderBrush" TargetName="bg" Value="#839496"/>
-                <Setter Property="BorderThickness" TargetName="bg" Value="1" />
-              </Trigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-    </Style>-->
-  </Window.Resources>
   <Grid>
     <materialDesign:Card Margin="0 0 0 0" Background="{DynamicResource PrimaryHueDarkBrush}"
                          Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                          Padding="8" Height="220"/>
-    <Label x:Name="sourceLabel" Content="Source:" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" ToolTip="Language source"
-              Foreground="{DynamicResource PrimaryHueLightBrush}"/>
+    <Label x:Name="sourceLabel" Content="_Source:" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" ToolTip="Language source"
+              Foreground="{DynamicResource PrimaryHueLightBrush}" Target="{Binding ElementName=nameSourceTypeCB}"/>
     <ComboBox x:Name="nameSourceTypeCB" HorizontalAlignment="Left" Margin="160,20,0,0" VerticalAlignment="Top" Width="200" Loaded="NameSourceType_Loaded" SelectionChanged="NameSourceType_SelectionChanged" Height="40" MaxDropDownHeight="600" 
               Background="{DynamicResource PrimaryHueDarkBrush}"
               FontWeight="Normal"/>
-    <Label x:Name="typeLabel" Content="Type:" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" ToolTip="Region or general origin of the name type to be generated"
-              Foreground="{DynamicResource PrimaryHueLightBrush}"/>
+    <Label x:Name="typeLabel" Content="_Type:" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" ToolTip="Region or general origin of the name type to be generated"
+              Foreground="{DynamicResource PrimaryHueLightBrush}" Target="{Binding ElementName=nameTypeCB}"/>
     <ComboBox x:Name="nameTypeCB" HorizontalAlignment="Left" Margin="160,80,0,0" VerticalAlignment="Top" Width="200" Loaded="NameType_Loaded" SelectionChanged="NameType_SelectionChanged" Height="40" 
               Background="{DynamicResource PrimaryHueDarkBrush}"
               FontWeight="Normal"/>
-    <Label x:Name="subTypeLabel" Content="Sub-Type:" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" ToolTip="Specific type of name to be generated"
-              Foreground="{DynamicResource PrimaryHueLightBrush}"/>
+    <Label x:Name="subTypeLabel" Content="S_ub-Type:" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" ToolTip="Specific type of name to be generated"
+              Foreground="{DynamicResource PrimaryHueLightBrush}" Target="{Binding ElementName=nameSubTypeCB}"/>
     <ComboBox x:Name="nameSubTypeCB" HorizontalAlignment="Left" Margin="160,140,0,0" VerticalAlignment="Top" Width="200" Height="40" Loaded="NameSubType_Loaded" SelectionChanged="NameSubType_SelectionChanged" 
               Background="{DynamicResource PrimaryHueDarkBrush}"
               FontWeight="Normal"/>
-    <Label x:Name="orderLabel" Content="Order:" HorizontalAlignment="Left" Margin="440,140,0,0" VerticalAlignment="Top" ToolTip="N-gram length used in Markov chain"
-              Foreground="{DynamicResource PrimaryHueLightBrush}"/>
+    <Label x:Name="orderLabel" Content="_Order:" HorizontalAlignment="Left" Margin="440,140,0,0" VerticalAlignment="Top" ToolTip="N-gram length used in Markov chain"
+              Foreground="{DynamicResource PrimaryHueLightBrush}" Target="{Binding ElementName=orderCB}"/>
     <ComboBox x:Name="orderCB" HorizontalAlignment="Left" Margin="600,140,0,0" VerticalAlignment="Top" Width="120" Loaded="OrderLength_Loaded" SelectionChanged="OrderLength_SelectionChanged" Height="40" 
               Background="{DynamicResource PrimaryHueDarkBrush}"
               FontWeight="Normal"/>
