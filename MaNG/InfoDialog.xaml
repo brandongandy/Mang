@@ -6,19 +6,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Mang"
         mc:Ignorable="d"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="About Mang" Height="506" Width="569" WindowStartupLocation="CenterScreen" Icon="icon.ico" ResizeMode="NoResize">
   <Grid>
-    <materialDesign:Card Background="{DynamicResource PrimaryHueDarkBrush}"
-                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                         Padding="8" Height="80"/>
-    <Button x:Name="infoOKButton" HorizontalAlignment="Left" Margin="260,415,0,0" VerticalAlignment="Top" Width="40" Height="40" BorderThickness="0" Click="InfoOKButton_Click" FontSize="16" Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
-      <StackPanel Orientation="Horizontal">
-        <materialDesign:PackIcon Kind="CheckboxMarkedCircleOutline" Height="24" Width="24" />
-      </StackPanel>
-    </Button>
+    <Button x:Name="infoOKButton" HorizontalAlignment="Left" Margin="260,415,0,0" VerticalAlignment="Top" Width="40" Height="40" BorderThickness="0" Click="InfoOKButton_Click" FontSize="16" />
     <Label x:Name="infoHeaderLabel" Content="About Mang" HorizontalAlignment="Left" Margin="20,17,0,0" VerticalAlignment="Top" FontSize="32"/>
     <TextBlock x:Name="infoTextBlock" HorizontalAlignment="Left" Margin="20,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="100" Width="520" Loaded="InfoTextBlock_Loaded" FontSize="14.667" FontWeight="Regular"/>
     <TextBox x:Name="infoTextBox" IsReadOnly="True" HorizontalAlignment="Left" Height="195" Margin="20,205,0,0" Padding="0,0,5,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520" Loaded="InfoTextBox_Loaded" VerticalScrollBarVisibility="Visible" FontSize="13.333"/>

@@ -17,10 +17,3 @@ C:\Development\MANG\MaNG\MANG\MaNG\obj\Debug\MaNG.Properties.Resources.resources
 C:\Development\MANG\MaNG\MANG\MaNG\obj\Debug\MaNG.exe
 C:\Development\MANG\MaNG\MANG\MaNG\obj\Debug\MaNG.pdb
 C:\Development\MANG\MaNG\MANG\MaNG\obj\Debug\App.baml
-C:\Development\MANG\MaNG\MANG\MaNG\bin\Debug\MaterialDesignColors.dll
-C:\Development\MANG\MaNG\MANG\MaNG\bin\Debug\MaterialDesignThemes.Wpf.dll
-C:\Development\MANG\MaNG\MANG\MaNG\bin\Debug\MaterialDesignThemes.Wpf.pdb
-C:\Development\MANG\MaNG\MANG\MaNG\bin\Debug\MaterialDesignThemes.Wpf.xml
-C:\Users\Brandon\Source\Git\Mang\MaNG\bin\Debug\MaNG.exe.config
-C:\Users\Brandon\Source\Git\Mang\MaNG\obj\Debug\MaNG.exe
-C:\Users\Brandon\Source\Git\Mang\MaNG\obj\Debug\MaNG.pdb
