@@ -11,8 +11,6 @@ Open the project in your IDE of choice and build / compile, or download the sour
 To run the .exe outside of the project folder, these files/folders must be copied together into their own folder:
 * 0_1 (this folder and its sub-folders make up the content of the app all will be explained below)
 * Mang.exe
-* MaterialDesignColors.dll
-* MaterialDesignThemes.Wpf.dll (these .dlls are required for the visual theme of the app)
 
 ### To Generate Names
 Mang parses through the folders and files found in `0_1` and uses the names of the folders to populate the dropdown menu items. Inside the lowest-level named folder is at least one text file (or could be several text files -- up to you!). Mang uses the contents of these text files to generate names.
