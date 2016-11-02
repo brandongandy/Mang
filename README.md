@@ -39,6 +39,3 @@ https://donjon.bin.sh/
 Icon by Freepik  
 http://www.flaticon.com/authors/freepik  
 Icon license Creative Commons BY 3.0  
-
-Material Design XAML Toolkit, for making this little app pretty:  
-http://materialdesigninxaml.net
