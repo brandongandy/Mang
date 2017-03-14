@@ -1,0 +1,21 @@
+﻿# User-specific files
+MaNG/*.suo
+MaNG/*.user
+MaNG/*.userosscache
+MaNG/*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+MaNG/*.userprefs
+
+# Build results
+MaNG/MaNG/[Dd]ebug/
+MaNG/[Dd]ebugPublic/
+MaNG/[Rr]elease/
+MaNG/[Rr]eleases/
+MaNG/x64/
+MaNG/x86/
+MaNG/bld/
+MaNG/[Bb]in/
+MaNG/[Oo]bj/
+MaNG/[Ll]og/
+packages/
