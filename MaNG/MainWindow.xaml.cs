@@ -9,16 +9,24 @@ namespace Mang
   /// </summary>
   public partial class MainWindow : Window
   {
+    private NameTools NameTools = new NameTools();
+
     public MainWindow()
     {
-      NameTools.PopulateDropDowns();
       InitializeComponent();
+      NameTools.PopulateDropDowns();
     }
 
     private void NameSourceType_Loaded(object sender, RoutedEventArgs e)
     {
       var comboBox = sender as ComboBox;
-      comboBox.ItemsSource = NameTools.GetNameSource();
+      try
+      {
+        comboBox.ItemsSource = NameTools.GetNameSource();
+      } catch (Exception ex)
+      {
+        markovInputBox.AppendText(ex.ToString());
+      }
       comboBox.SelectedIndex = 0;
     }
 

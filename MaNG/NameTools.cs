@@ -7,44 +7,68 @@ namespace Mang
 { 
   public class NameTools
   {
+    #region Field Region
+
     // Root directory that will contain the subfolders for name source and sub-type
-    public static readonly string rootDir = @"0_1\";
+    private static readonly string rootDir = @"0_1\";
+
+    private List<int> orderLength;
+    private List<int> minLength;
+
+    #endregion
+
+    #region Property Region
 
     // Populate the drop down lists
-    public static List<int> OrderLength = new List<int>();
-    public static List<int> MinLength = new List<int>();
-
-    public static void PopulateDropDowns()
+    public List<int> OrderLength
     {
+      get { return orderLength; }
+      private set { orderLength = value; }
+    }
 
+    public List<int> MinLength
+    {
+      get { return minLength; }
+      private set { minLength = value; }
+    }
+
+    #endregion
+
+    #region Constructor
+
+    public NameTools()
+    {
+      orderLength = new List<int>();
+      minLength = new List<int>();
+    }
+
+    #endregion
+
+    public void PopulateDropDowns()
+    {
       // Order and length max values should remain the same -- too high on either and the work
       // will take too long to be useful
       for (int i = 1; i < 5; i++) {
-        OrderLength.Add(i);
-        MinLength.Add(i);
+        orderLength.Add(i);
+        minLength.Add(i);
       }
     }
 
-    public static List<string> GetNameSource()
+    public List<string> GetNameSource()
     {
       List<string> NameSourceType = new List<string>();
       DirectoryInfo thisRoot = new DirectoryInfo(rootDir);
       DirectoryInfo[] subDir = thisRoot.GetDirectories();
-      try
+
+      foreach (DirectoryInfo di in subDir)
       {
-        foreach (DirectoryInfo di in subDir)
-        {
-          NameSourceType.Add(di.ToString());
-        }
-      } catch (Exception e)
-      {
-        // TODO: Handle a directory / file not found exception
-        Console.Write(e);
+        NameSourceType.Add(di.ToString());
       }
+
       return NameSourceType;
     }
 
-    public static List<string> GetNameType()
+    public List<string> GetNameType()
     {
       List<string> NameType = new List<string>();
       NameType.Clear();
@@ -66,7 +90,7 @@ namespace Mang
       return NameType;
     }
 
-    public static List<string> GetNameSubType()
+    public List<string> GetNameSubType()
     {
       List<string> NameSubType = new List<string>();
       NameSubType.Clear();
@@ -87,7 +111,7 @@ namespace Mang
       return NameSubType;
     }
 
-    public static string FromPreset()
+    public string FromPreset()
     {
       string curDir = NameTools.rootDir + GlobalProperties.SOURCE + @"\" + GlobalProperties.TYPE + @"\" + GlobalProperties.SUBTYPE;
       IEnumerable<string> txtFiles = Directory.EnumerateFiles(curDir, "*.*");
@@ -110,7 +134,7 @@ namespace Mang
       }
     }
 
-    public static string FromInput(string input)
+    public string FromInput(string input)
     {
       char[] separator = { ' ', '\n', '\r' };
 
