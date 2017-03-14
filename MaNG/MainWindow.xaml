@@ -25,7 +25,7 @@
     <ComboBox x:Name="orderCB" HorizontalAlignment="Left" Margin="600,140,0,0" VerticalAlignment="Top" Width="120" Loaded="OrderLength_Loaded" SelectionChanged="OrderLength_SelectionChanged" Height="40" 
               FontWeight="Normal"/>
     <Button x:Name="genFromPreset" HorizontalAlignment="Left" Margin="640,200,0,0" VerticalAlignment="Top" Width="40" Click="Preset_Click" Height="40"
-            ToolTip="Generate word list from dropdown parameters" />
+            Content="v" ToolTip="Generate word list from dropdown parameters" />
     <Label x:Name="inputLabel" Content="Markov Chain Input" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top"/>
     <TextBox x:Name="markovInputBox" HorizontalAlignment="Left" Height="420" Margin="40,300,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="280" 
              ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="16"/>
@@ -33,10 +33,10 @@
     <TextBox x:Name="markovOutputBox" HorizontalAlignment="Left" Height="420" Margin="440,300,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="280" 
     	ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="16" FontWeight="Normal"/>
     <Button x:Name="inToOut" HorizontalAlignment="Left" Margin="360,405,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="UserInput_Click" 
-            ToolTip="Generate word list from input box" />
+            Content=">" ToolTip="Generate word list from input box" />
     <Button x:Name="infoButton" HorizontalAlignment="Left" Margin="680,15,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="Info_Click"
-            ToolTip="Info" />
+            Content="&#128712;" ToolTip="Info" />
     <Button x:Name="helpButton" HorizontalAlignment="Left" Margin="620,15,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="Help_Click"
-            ToolTip="Help" />
+            Content="?" ToolTip="Help" />
   </Grid>
 </Window>
