@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MaNG;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Mang
 {
@@ -9,12 +11,16 @@ namespace Mang
   /// </summary>
   public partial class MainWindow : Window
   {
-    private NameTools NameTools = new NameTools();
+    private NameTools NameTools;
 
     public MainWindow()
     {
       InitializeComponent();
-      NameTools.PopulateDropDowns();
+      NameTools = new NameTools();
+      if (!string.IsNullOrEmpty(GlobalProperties.ROOTDIR))
+      {
+        NameTools.PopulateDropDowns();
+      }
     }
 
     private void NameSourceType_Loaded(object sender, RoutedEventArgs e)
@@ -23,7 +29,8 @@ namespace Mang
       try
       {
         comboBox.ItemsSource = NameTools.GetNameSource();
-      } catch (Exception ex)
+      }
+      catch (Exception ex)
       {
         markovInputBox.AppendText(ex.ToString());
       }
@@ -39,7 +46,8 @@ namespace Mang
         nameTypeCB.ClearValue(ItemsControl.ItemsSourceProperty);
         nameTypeCB.ItemsSource = NameTools.GetNameType();
         nameTypeCB.SelectedIndex = 0;
-      } catch (Exception ex)
+      }
+      catch (Exception ex)
       {
         markovInputBox.AppendText(ex.ToString());
       }
@@ -123,6 +131,18 @@ namespace Mang
     {
       HelpDialog helpDialog = new HelpDialog();
       helpDialog.ShowDialog();
+    }
+
+    private void ChooseDirectory_Click(object sender, RoutedEventArgs e)
+    {
+      RootDirPicker rdp = new RootDirPicker();
+      rdp.Owner = this;
+      rdp.ShowDialog();
+
+      if (!string.IsNullOrEmpty(GlobalProperties.ROOTDIR))
+      {
+        NameTools.PopulateDropDowns();
+      }
     }
   }
 }

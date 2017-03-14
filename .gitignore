@@ -19,3 +19,9 @@ MaNG/[Bb]in/
 MaNG/[Oo]bj/
 MaNG/[Ll]og/
 packages/
+
+# Visual Studio 2015 cache/options directory
+.vs/
+
+*.vspscc
+*.vssscc

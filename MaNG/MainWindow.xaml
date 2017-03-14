@@ -8,35 +8,46 @@
         mc:Ignorable="d"
         Title="Mang Beta v1.1" Height="786" Width="773" WindowStartupLocation="CenterScreen" FontSize="18" FontWeight="Medium" ResizeMode="CanMinimize" Icon="icon.ico">
   <Grid>
-    <Label x:Name="sourceLabel" Content="_Source:" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" ToolTip="Language source" 
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Menu Grid.Row="0">
+      <MenuItem Name="file" Header="_File" FontSize="20">
+        <MenuItem Name="chooseDirectory" Header="_Choose Name Directory"  Click="ChooseDirectory_Click"/>
+      </MenuItem>
+    </Menu>
+    <Canvas Grid.Row="1">
+      <Label x:Name="sourceLabel" Content="_Source:" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" ToolTip="Language source" 
            Target="{Binding ElementName=nameSourceTypeCB}"/>
-    <ComboBox x:Name="nameSourceTypeCB" HorizontalAlignment="Left" Margin="160,20,0,0" VerticalAlignment="Top" Width="200" Loaded="NameSourceType_Loaded" SelectionChanged="NameSourceType_SelectionChanged" Height="40" MaxDropDownHeight="600" 
+      <ComboBox x:Name="nameSourceTypeCB" HorizontalAlignment="Left" Margin="160,20,0,0" VerticalAlignment="Top" Width="200" Loaded="NameSourceType_Loaded" SelectionChanged="NameSourceType_SelectionChanged" Height="40" MaxDropDownHeight="600" 
               FontWeight="Normal"/>
-    <Label x:Name="typeLabel" Content="_Type:" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" ToolTip="Region or general origin of the name type to be generated"
+      <Label x:Name="typeLabel" Content="_Type:" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top" ToolTip="Region or general origin of the name type to be generated"
               Target="{Binding ElementName=nameTypeCB}"/>
-    <ComboBox x:Name="nameTypeCB" HorizontalAlignment="Left" Margin="160,80,0,0" VerticalAlignment="Top" Width="200" Loaded="NameType_Loaded" SelectionChanged="NameType_SelectionChanged" Height="40" 
+      <ComboBox x:Name="nameTypeCB" HorizontalAlignment="Left" Margin="160,80,0,0" VerticalAlignment="Top" Width="200" Loaded="NameType_Loaded" SelectionChanged="NameType_SelectionChanged" Height="40" 
               FontWeight="Normal"/>
-    <Label x:Name="subTypeLabel" Content="S_ub-Type:" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" ToolTip="Specific type of name to be generated"
+      <Label x:Name="subTypeLabel" Content="S_ub-Type:" HorizontalAlignment="Left" Margin="40,140,0,0" VerticalAlignment="Top" ToolTip="Specific type of name to be generated"
               Target="{Binding ElementName=nameSubTypeCB}"/>
-    <ComboBox x:Name="nameSubTypeCB" HorizontalAlignment="Left" Margin="160,140,0,0" VerticalAlignment="Top" Width="200" Height="40" Loaded="NameSubType_Loaded" SelectionChanged="NameSubType_SelectionChanged" 
+      <ComboBox x:Name="nameSubTypeCB" HorizontalAlignment="Left" Margin="160,140,0,0" VerticalAlignment="Top" Width="200" Height="40" Loaded="NameSubType_Loaded" SelectionChanged="NameSubType_SelectionChanged" 
               FontWeight="Normal"/>
-    <Label x:Name="orderLabel" Content="_Order:" HorizontalAlignment="Left" Margin="440,140,0,0" VerticalAlignment="Top" ToolTip="N-gram length used in Markov chain"
+      <Label x:Name="orderLabel" Content="_Order:" HorizontalAlignment="Left" Margin="440,140,0,0" VerticalAlignment="Top" ToolTip="N-gram length used in Markov chain"
            Target="{Binding ElementName=orderCB}"/>
-    <ComboBox x:Name="orderCB" HorizontalAlignment="Left" Margin="600,140,0,0" VerticalAlignment="Top" Width="120" Loaded="OrderLength_Loaded" SelectionChanged="OrderLength_SelectionChanged" Height="40" 
+      <ComboBox x:Name="orderCB" HorizontalAlignment="Left" Margin="600,140,0,0" VerticalAlignment="Top" Width="120" Loaded="OrderLength_Loaded" SelectionChanged="OrderLength_SelectionChanged" Height="40" 
               FontWeight="Normal"/>
-    <Button x:Name="genFromPreset" HorizontalAlignment="Left" Margin="640,200,0,0" VerticalAlignment="Top" Width="40" Click="Preset_Click" Height="40"
+      <Button x:Name="genFromPreset" HorizontalAlignment="Left" Margin="640,200,0,0" VerticalAlignment="Top" Width="40" Click="Preset_Click" Height="40"
             Content="v" ToolTip="Generate word list from dropdown parameters" />
-    <Label x:Name="inputLabel" Content="Markov Chain Input" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top"/>
-    <TextBox x:Name="markovInputBox" HorizontalAlignment="Left" Height="420" Margin="40,300,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="280" 
+      <Label x:Name="inputLabel" Content="Markov Chain Input" HorizontalAlignment="Left" Margin="40,260,0,0" VerticalAlignment="Top"/>
+      <TextBox x:Name="markovInputBox" HorizontalAlignment="Left" Height="400" Margin="40,300,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="280" 
              ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="16"/>
-    <Label x:Name="outputLabel" Content="Markov Chain Output" HorizontalAlignment="Left" Margin="440,260,0,0" VerticalAlignment="Top"/>
-    <TextBox x:Name="markovOutputBox" HorizontalAlignment="Left" Height="420" Margin="440,300,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="280" 
+      <Label x:Name="outputLabel" Content="Markov Chain Output" HorizontalAlignment="Left" Margin="440,260,0,0" VerticalAlignment="Top"/>
+      <TextBox x:Name="markovOutputBox" HorizontalAlignment="Left" Height="400" Margin="440,300,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="280" 
     	ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" AcceptsReturn="True" FontSize="16" FontWeight="Normal"/>
-    <Button x:Name="inToOut" HorizontalAlignment="Left" Margin="360,405,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="UserInput_Click" 
+      <Button x:Name="inToOut" HorizontalAlignment="Left" Margin="360,405,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="UserInput_Click" 
             Content=">" ToolTip="Generate word list from input box" />
-    <Button x:Name="infoButton" HorizontalAlignment="Left" Margin="680,15,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="Info_Click"
+      <Button x:Name="infoButton" HorizontalAlignment="Left" Margin="680,15,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="Info_Click"
             Content="&#128712;" ToolTip="Info" />
-    <Button x:Name="helpButton" HorizontalAlignment="Left" Margin="620,15,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="Help_Click"
+      <Button x:Name="helpButton" HorizontalAlignment="Left" Margin="620,15,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="Help_Click"
             Content="?" ToolTip="Help" />
+    </Canvas>
   </Grid>
 </Window>

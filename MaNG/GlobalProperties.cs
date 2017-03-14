@@ -13,5 +13,8 @@ namespace Mang
     public static string TYPE;
     public static string SUBTYPE;
     public static int ORDER = 2;
+
+    // Config
+    public static string ROOTDIR = @"Names\";
   }
 }

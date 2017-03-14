@@ -43,6 +43,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -75,6 +78,14 @@
     <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack.Core.1.1.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack.Shell.1.1.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -122,9 +133,16 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RootDirPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NameGenerator.cs" />
+    <Compile Include="RootDirPicker.xaml.cs">
+      <DependentUpon>RootDirPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SecondMarkov.cs" />
     <Compile Include="NameTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -144,9 +162,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include=".gitignore" />
     <None Include="app.manifest" />
     <None Include="mangkeyfile.pfx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -172,61 +190,174 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bin\Debug\0_1\America\Aztec\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\America\Aztec\Gods\input.txt" />
-    <Resource Include="bin\Debug\0_1\America\Aztec\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\America\Aztec\Town\input.txt" />
-    <Resource Include="bin\Debug\0_1\America\Aztec\Word\input.txt" />
-    <Resource Include="bin\Debug\0_1\America\Inca\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\America\Inca\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\America\Navajo\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\America\Navajo\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\America\Navajo\Surnames\input.txt" />
-    <Resource Include="bin\Debug\0_1\Ancient World\Assyria\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Ancient World\Egypt\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Ancient World\Egypt\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Ancient World\Greek\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Ancient World\Greek\God\input.txt" />
-    <Resource Include="bin\Debug\0_1\Ancient World\Greek\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Ancient World\Greek\Town\input.txt" />
-    <Resource Include="bin\Debug\0_1\Ancient World\Persia\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Ancient World\Persia\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\England - Medieval\Rarities\Female %28Unique%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\England - Medieval\Rarities\Male %28Unique%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\England - Medieval\Saxon\Female %28Dithematic%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\England - Medieval\Saxon\Female %28Monothematic%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\England - Medieval\Saxon\God\input.txt" />
-    <Resource Include="bin\Debug\0_1\England - Medieval\Saxon\Male %28Dithematic%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\England - Medieval\Saxon\Male %28Monothematic%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\Europe - Medieval\Germany\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Europe - Medieval\Germany\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Europe - Medieval\Goths\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Europe - Medieval\Goths\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Europe - Scandinavia\Old Norse\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Europe - Scandinavia\Old Norse\God\input.txt" />
-    <Resource Include="bin\Debug\0_1\Europe - Scandinavia\Old Norse\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Fantasy\Lovecraft\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Iran\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Iran\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Iran\Surnames\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Jewish\Female %28Modern%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Jewish\Female %28Uncommon%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Jewish\Male %28Modern%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Jewish\Male %28Uncommon%29\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Turkey\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Turkey\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Middle-East\Turkey\Surnames\input.txt" />
-    <Resource Include="bin\Debug\0_1\Orient\Japan\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Orient\Japan\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Orient\Japan\Surnames\input.txt" />
-    <Resource Include="bin\Debug\0_1\Orient\Korea\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Orient\Korea\Male\input.txt" />
-    <Resource Include="bin\Debug\0_1\Orient\Korea\Surnames\input.txt" />
-    <Resource Include="bin\Debug\0_1\Orient\Mongolia\Names\input.txt" />
-    <Resource Include="bin\Debug\0_1\Orient\Mongolia\Surnames\input.txt" />
-    <Resource Include="bin\Debug\0_1\Pacific\Hawaii\Female\input.txt" />
-    <Resource Include="bin\Debug\0_1\Pacific\Hawaii\Gender Neutral\input.txt" />
-    <Resource Include="bin\Debug\0_1\Pacific\Hawaii\Male\input.txt" />
+    <Content Include="Names\America\Aztec\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\America\Aztec\Gods\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\America\Aztec\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\America\Aztec\Town\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\America\Aztec\Word\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\America\Inca\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\America\Inca\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\America\Navajo\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\America\Navajo\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\America\Navajo\Surnames\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Ancient World\Assyria\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Ancient World\Egypt\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Ancient World\Egypt\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Ancient World\Greek\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Ancient World\Greek\God\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Ancient World\Greek\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Ancient World\Greek\Town\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Ancient World\Persia\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Ancient World\Persia\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\England - Medieval\Rarities\Female %28Unique%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\England - Medieval\Rarities\Male %28Unique%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\England - Medieval\Saxon\Female %28Dithematic%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\England - Medieval\Saxon\Female %28Monothematic%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\England - Medieval\Saxon\God\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\England - Medieval\Saxon\Male %28Dithematic%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\England - Medieval\Saxon\Male %28Monothematic%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Europe - Medieval\Germany\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Europe - Medieval\Germany\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Europe - Medieval\Goths\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Europe - Medieval\Goths\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Europe - Scandinavia\Old Norse\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Europe - Scandinavia\Old Norse\God\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Europe - Scandinavia\Old Norse\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Fantasy\Lovecraft\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Fantasy\Tolkien\Orc\orc.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Iran\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Iran\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Iran\Surnames\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Jewish\Female %28Modern%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Jewish\Female %28Uncommon%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Jewish\Male %28Modern%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Jewish\Male %28Uncommon%29\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Turkey\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Turkey\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Middle-East\Turkey\Surnames\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Orient\Japan\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Orient\Japan\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Orient\Japan\Surnames\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Orient\Korea\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Orient\Korea\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Orient\Korea\Surnames\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Orient\Mongolia\Names\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Orient\Mongolia\Surnames\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Pacific\Hawaii\Female\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Pacific\Hawaii\Gender Neutral\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Names\Pacific\Hawaii\Male\input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
