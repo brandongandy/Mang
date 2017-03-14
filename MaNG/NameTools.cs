@@ -7,40 +7,63 @@ namespace Mang
 { 
   public class NameTools
   {
-    // Populate the drop down lists
-    public static List<int> OrderLength = new List<int>();
-    public static List<int> MinLength = new List<int>();
 
-    public static void PopulateDropDowns()
+    #region Field Region
+
+    private List<int> orderLength;
+    private List<int> minLength;
+
+    #endregion
+
+    #region Property Region
+
+    public List<int> OrderLength
+    {
+      get { return orderLength; }
+    }
+
+    public List<int> MinLength
+    {
+      get { return minLength; }
+    }
+
+    #endregion
+
+    #region Constructor
+
+    public NameTools()
+    {
+      orderLength = new List<int>();
+      minLength = new List<int>();
+    }
+
+    #endregion
+
+    public void PopulateDropDowns()
     {
       // Order and length max values should remain the same -- too high on either and the work
       // will take too long to be useful
       for (int i = 1; i < 5; i++) {
-        OrderLength.Add(i);
-        MinLength.Add(i);
+        orderLength.Add(i);
+        minLength.Add(i);
       }
     }
 
-    public static List<string> GetNameSource()
+    public List<string> GetNameSource()
     {
       List<string> NameSourceType = new List<string>();
       DirectoryInfo thisRoot = new DirectoryInfo(GlobalProperties.ROOTDIR);
       DirectoryInfo[] subDir = thisRoot.GetDirectories();
-      try
+
+      foreach (DirectoryInfo di in subDir)
       {
-        foreach (DirectoryInfo di in subDir)
-        {
-          NameSourceType.Add(di.ToString());
-        }
-      } catch (Exception e)
-      {
-        // TODO: Handle a directory / file not found exception
-        Console.Write(e);
+        NameSourceType.Add(di.ToString());
       }
+
       return NameSourceType;
     }
 
-    public static List<string> GetNameType()
+    public List<string> GetNameType()
     {
       List<string> NameType = new List<string>();
       NameType.Clear();
@@ -48,21 +71,15 @@ namespace Mang
       DirectoryInfo thisRoot = new DirectoryInfo(subRoot);
       DirectoryInfo[] subDir = thisRoot.GetDirectories();
 
-      try
+      foreach (DirectoryInfo di in subDir)
       {
-        foreach (DirectoryInfo di in subDir)
-        {
-          NameType.Add(di.ToString());
-        }
-      } catch (Exception e)
-      {
-        Console.Write(e);
+        NameType.Add(di.ToString());
       }
-
+      
       return NameType;
     }
 
-    public static List<string> GetNameSubType()
+    public List<string> GetNameSubType()
     {
       List<string> NameSubType = new List<string>();
       NameSubType.Clear();
@@ -83,9 +100,11 @@ namespace Mang
       return NameSubType;
     }
 
-    public static string FromPreset()
+    public string FromPreset()
     {
-      string curDir = GlobalProperties.ROOTDIR + GlobalProperties.SOURCE + @"\" + GlobalProperties.TYPE + @"\" + GlobalProperties.SUBTYPE;
+      string curDir = GlobalProperties.ROOTDIR + GlobalProperties.SOURCE + @"\" + 
+                      GlobalProperties.TYPE + @"\" + GlobalProperties.SUBTYPE;
+
       IEnumerable<string> txtFiles = Directory.EnumerateFiles(curDir, "*.*");
       try
       {
@@ -98,15 +117,17 @@ namespace Mang
         }
 
         NameGenerator ng = new NameGenerator(input);
+
         string[] output = ng.nameList;
-        return String.Join(Environment.NewLine, output);
+
+        return string.Join(Environment.NewLine, output);
       } catch (Exception ex)
       {
         return ex.ToString();
       }
     }
 
-    public static string FromInput(string input)
+    public string FromInput(string input)
     {
       char[] separator = { ' ', '\n', '\r' };
 
@@ -126,7 +147,7 @@ namespace Mang
       {
         NameGenerator ng = new NameGenerator(userInput);
         string[] markovOutput = ng.nameList;
-        return String.Join(Environment.NewLine, markovOutput);
+        return string.Join(Environment.NewLine, markovOutput);
       } catch (Exception ex)
       {
         return ex.ToString();
