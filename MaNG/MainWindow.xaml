@@ -8,16 +8,7 @@
         mc:Ignorable="d"
         Title="Mang Beta v1.1" Height="786" Width="773" WindowStartupLocation="CenterScreen" FontSize="18" FontWeight="Medium" ResizeMode="CanMinimize" Icon="icon.ico">
   <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="30" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-    <Menu Grid.Row="0">
-      <MenuItem Name="file" Header="_File" FontSize="20">
-        <MenuItem Name="chooseDirectory" Header="_Choose Name Directory"  Click="ChooseDirectory_Click"/>
-      </MenuItem>
-    </Menu>
-    <Canvas Grid.Row="1">
+    <Canvas>
       <Label x:Name="sourceLabel" Content="_Source:" HorizontalAlignment="Left" Margin="40,20,0,0" VerticalAlignment="Top" ToolTip="Language source" 
            Target="{Binding ElementName=nameSourceTypeCB}"/>
       <ComboBox x:Name="nameSourceTypeCB" HorizontalAlignment="Left" Margin="160,20,0,0" VerticalAlignment="Top" Width="200" Loaded="NameSourceType_Loaded" SelectionChanged="NameSourceType_SelectionChanged" Height="40" MaxDropDownHeight="600" 

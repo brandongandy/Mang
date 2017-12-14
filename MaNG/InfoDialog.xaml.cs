@@ -22,7 +22,7 @@ namespace Mang
       infoHeader.Text = "Mang\n" +
                         "A name generator app\n" +
                         "Version - 1.0\n" +
-                        "Copyright © 2016 - Brandon Gandy\n" +
+                        "Copyright © 2017 - Brandon Gandy\n" +
                         "All rights reserved";
     }
 
@@ -40,8 +40,7 @@ namespace Mang
                   "https://tekeli.li/onomastikon/index.html \n\n" +
                   "donjon, which inspired me to make this tool.\n" +
                   "https://donjon.bin.sh/ \n\n" +
-                  "Icon by Freepik\nhttp://www.flaticon.com/authors/freepik\nIcon license Creative Commons BY 3.0\n\n" +
-                  "Material Design XAML Toolkit, for making this little app pretty:\nhttp://materialdesigninxaml.net/ ";
+                  "Icon by Freepik\nhttp://www.flaticon.com/authors/freepik\nIcon license Creative Commons BY 3.0";
     }
 
     private void InfoOKButton_Click(object sender, RoutedEventArgs e)

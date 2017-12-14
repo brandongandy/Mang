@@ -9,7 +9,7 @@
         Title="Mang Help" Height="512" Width="589" WindowStartupLocation="CenterScreen" Icon="icon.ico" ResizeMode="NoResize">
   <Grid>
     <TextBlock x:Name="helpTextBlock" HorizontalAlignment="Left" Margin="20,20,0,0" TextWrapping="Wrap" FontSize="16" Text="TextBlock" VerticalAlignment="Top" Height="380" Width="530" Loaded="HelpTextBox_Loaded" TextAlignment="Justify"/>
-    <Button x:Name="helpOKButton" HorizontalAlignment="Left" Margin="280,420,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="HelpOKButton_Click" FontSize="16" HorizontalContentAlignment="Center" />
+    <Button x:Name="helpOKButton" HorizontalAlignment="Left" Margin="280,420,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="HelpOKButton_Click" FontSize="16" HorizontalContentAlignment="Center" Content="OK" />
 
   </Grid>
 </Window>
