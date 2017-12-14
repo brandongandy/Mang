@@ -6,25 +6,34 @@ namespace Mang
   public class NameGenerator
   {
     private SecondMarkov markov;
-    private int listSize = 50;
+    private int listSize = 20;
     private List<string> stringsUsed = new List<string>();
     private Random rand = new Random();
     private int stringsUsedSized = 0;
 
-    public string[] nameList;
+    public List<string> NameList;
 
     public NameGenerator(IEnumerable<string> input)
     {
       markov = new SecondMarkov(input);
-      nameList = GetNextNames();
+      NameList = GetNextNames();
     }
 
-    private string[] GetNextNames()
+    private List<string> GetNextNames()
     {
-      string[] names = new string[listSize];
+      List<string> names = new List<string>();
       for (int i = 0; i < listSize; i++)
       {
-        names[i] = GetNextName();
+        string nextName = GetNextName();
+        if (names.Contains(nextName))
+        {
+          i--;
+          continue;
+        }
+        else
+        {
+          names.Add(nextName);
+        }
       }
       return names;
     }

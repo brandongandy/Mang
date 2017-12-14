@@ -17,6 +17,7 @@ namespace Mang
     {
       InitializeComponent();
       NameTools = new NameTools();
+
       if (!string.IsNullOrEmpty(GlobalProperties.ROOTDIR))
       {
         NameTools.PopulateDropDowns();

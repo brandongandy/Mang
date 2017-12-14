@@ -118,7 +118,7 @@ namespace Mang
 
         NameGenerator ng = new NameGenerator(input);
 
-        string[] output = ng.nameList;
+        List<string> output = ng.NameList;
 
         return string.Join(Environment.NewLine, output);
       } catch (Exception ex)
@@ -146,7 +146,7 @@ namespace Mang
       try
       {
         NameGenerator ng = new NameGenerator(userInput);
-        string[] markovOutput = ng.nameList;
+        List<string> markovOutput = ng.NameList;
         return string.Join(Environment.NewLine, markovOutput);
       } catch (Exception ex)
       {
