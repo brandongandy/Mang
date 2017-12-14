@@ -6,14 +6,12 @@ It is "moddable" in the sense that you, the user, can extend the input simply by
 Download the source and compile.
 ## Usage
 ### To Run:
-Open the project in your IDE of choice and build / compile, or download the source and run the Mang executable.
+Open the project in your IDE of choice and build / compile / run.
 
-To run the .exe outside of the project folder, these files/folders must be copied together into their own folder:
-* 0_1 (this folder and its sub-folders make up the content of the app all will be explained below)
-* Mang.exe
+An installer may be coming shortly.
 
 ### To Generate Names
-Mang parses through the folders and files found in `0_1` and uses the names of the folders to populate the dropdown menu items. Inside the lowest-level named folder is at least one text file (or could be several text files -- up to you!). Mang uses the contents of these text files to generate names.
+Mang parses through the folders and files found in the `Names` folder and uses the names of the folders to populate the dropdown menu items. Inside the lowest-level named folder is at least one text file (or could be several text files -- up to you!). Mang uses the contents of these text files to generate names.
 
 To add more dropdown menu items, simply make a new folder at the desired hierarchy level (explained below), then add a text file with enough contents to sensibly generate words from. For best results, it's recommended the file contains 100 items or more.
 
