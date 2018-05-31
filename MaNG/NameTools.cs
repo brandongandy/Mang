@@ -1,89 +1,214 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Mang
-{ 
-  public class NameTools
+{
+  public class NameTools : INotifyPropertyChanged
   {
-
-    #region Field Region
-
-    private List<int> orderLength;
-    private List<int> minLength;
+    #region Fields
+    
+    private List<string> nameSources;
+    private List<string> nameTypes;
+    private List<string> nameSubTypes;
+    private string markovChainList;
 
     #endregion
 
-    #region Property Region
+    #region Properties
 
-    public List<int> OrderLength
+    public List<int> TokenLengthList { get; } = new List<int>{ 1, 2, 3, 4, 5 };
+
+    public int TokenLength { get; set; }
+
+    /// <summary>
+    /// The name of the root folder where all of the sub-folders containing metadata and data are held.
+    /// </summary>
+    public string RootDirectory { get => @"Names"; }
+
+    /// <summary>
+    /// The name of the current "Source" directory through which the program should browse.
+    /// </summary>
+    public string NameSourceDirectory { get; set; }
+
+    /// <summary>
+    /// The name of the current "Type" directory through which the program should browse.
+    /// </summary>
+    public string NameTypeDirectory { get; set; }
+
+    /// <summary>
+    /// The name of the current "SubType" directory through which the program should browse.
+    /// </summary>
+    public string NameSubTypeDirectory { get; set; }
+
+    /// <summary>
+    /// A list of geographical regions, fantasy literature, etc., from which the name lists are derived.
+    /// </summary>
+    public List<string> NameSources
     {
-      get { return orderLength; }
+      get { return nameSources; }
+      private set { nameSources = value; NotifyPropertyChanged(); }
     }
 
-    public List<int> MinLength
+    /// <summary>
+    /// Sub-regions, cultures, etc., from which the SubType lists are derived.
+    /// </summary>
+    public List<string> NameTypes
     {
-      get { return minLength; }
+      get { return nameTypes; }
+      private set { nameTypes = value; NotifyPropertyChanged(); }
+    }
+
+    /// <summary>
+    /// Denotes the granularity at which names are generated.
+    /// </summary>
+    public List<string> NameSubTypes
+    {
+      get { return nameSubTypes; }
+      private set { nameSubTypes = value; NotifyPropertyChanged(); }
+    }
+
+    /// <summary>
+    /// A formatted list of strings containing Markov Chain output for use in TextBoxes.
+    /// </summary>
+    public string MarkovChainList
+    {
+      get { return markovChainList; }
+      set { markovChainList = value; NotifyPropertyChanged(); }
     }
 
     #endregion
 
     #region Constructor
 
+    /// <summary>
+    /// Initializes the NameTools class and populates the lists with default values.
+    /// </summary>
     public NameTools()
     {
-      orderLength = new List<int>();
-      minLength = new List<int>();
+      NameSources = GetNameSources();
+      NameTypes = GetNameTypes();
+      NameSubTypes = GetNameSubTypes();
     }
 
     #endregion
 
-    public void PopulateDropDowns()
+    #region Public Methods
+
+    /// <summary>
+    /// Use to refresh the current list of NameTypes after parameter selection.
+    /// </summary>
+    public void RefreshNameTypes()
     {
-      // Order and length max values should remain the same -- too high on either and the work
-      // will take too long to be useful
-      for (int i = 1; i < 5; i++) {
-        orderLength.Add(i);
-        minLength.Add(i);
-      }
+      NameTypes = GetNameTypes();
     }
 
-    public List<string> GetNameSource()
+    /// <summary>
+    /// Use to refresh the current list of NameSubTypes after parameter selection.
+    /// </summary>
+    public void RefreshNameSubTypes()
     {
-      List<string> NameSourceType = new List<string>();
-      DirectoryInfo thisRoot = new DirectoryInfo(GlobalProperties.ROOTDIR);
-      DirectoryInfo[] subDir = thisRoot.GetDirectories();
+      NameSubTypes = GetNameSubTypes();
+    }
 
-      foreach (DirectoryInfo di in subDir)
+    /// <summary>
+    /// Populates the MarkovChainList from preset data in the file system.
+    /// </summary>
+    public void FromPreset()
+    {
+      string currentDirectory = $@"{RootDirectory}\{NameSourceDirectory}\{NameTypeDirectory}\{NameSubTypeDirectory}";
+
+      IEnumerable<string> txtFiles = Directory.EnumerateFiles(currentDirectory, "*.*");
+
+      // if there are multiple input files in the subdir, just shove them all
+      // into one list
+      List<string> input = new List<string>();
+      foreach (string filePath in txtFiles)
       {
-        NameSourceType.Add(di.ToString());
+        input = (File.ReadAllLines(filePath).ToList());
       }
 
-      return NameSourceType;
+      NameGenerator ng = new NameGenerator(input, TokenLength);
+
+      MarkovChainList = String.Join(Environment.NewLine, ng.NameList);
     }
 
-    public List<string> GetNameType()
+    /// <summary>
+    /// Takes an input string and parses it, then populates the MarkovChainList with the output.
+    /// </summary>
+    /// <param name="input">The input string for the Markov chain</param>
+    public void FromInput(string input)
     {
-      List<string> NameType = new List<string>();
-      NameType.Clear();
-      string subRoot = GlobalProperties.ROOTDIR + GlobalProperties.SOURCE;
+      if (string.IsNullOrEmpty(input))
+      {
+        throw new ArgumentNullException();
+      }
+
+      char[] separator = { ' ', '\n', '\r' };
+
+      string[] userInput = input.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+      
+      NameGenerator ng = new NameGenerator(userInput, TokenLength);
+      MarkovChainList = String.Join(Environment.NewLine, ng.NameList);
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    /// <summary>
+    /// Iterates through the program's Root Directory to determine the list of folders from which the NameSources
+    /// get their data.
+    /// </summary>
+    /// <returns>A list of folder names to be used as NameSources</returns>
+    private List<string> GetNameSources()
+    {
+      List<string> nameSourceType = new List<string>();
+      DirectoryInfo sourceRoot = new DirectoryInfo(RootDirectory);
+      DirectoryInfo[] subDirectories = sourceRoot.GetDirectories();
+
+      foreach (DirectoryInfo di in subDirectories)
+      {
+        nameSourceType.Add(di.ToString());
+      }
+
+      return nameSourceType;
+    }
+
+    /// <summary>
+    /// Iterates through subfolders of the given NameSource to determine the list of NameTypes from which the
+    /// NameSubTypes will get their data.
+    /// </summary>
+    /// <returns>A list of folder names to be used as NameTypes</returns>
+    private List<string> GetNameTypes()
+    {
+      string subRoot = $@"{RootDirectory}\{NameSourceDirectory}";
+
+      List<string> nameType = new List<string>();
       DirectoryInfo thisRoot = new DirectoryInfo(subRoot);
       DirectoryInfo[] subDir = thisRoot.GetDirectories();
 
       foreach (DirectoryInfo di in subDir)
       {
-        NameType.Add(di.ToString());
+        nameType.Add(di.ToString());
       }
-      
-      return NameType;
+
+      return nameType;
     }
 
-    public List<string> GetNameSubType()
+    /// <summary>
+    /// Iterates through the files of the given NameType folder to generate a list of NameSubTypes to be used
+    /// by the NameGenerator in generating Markov names.
+    /// </summary>
+    /// <returns>A list of file names to be used as NameSubTypes</returns>
+    private List<string> GetNameSubTypes()
     {
-      List<string> NameSubType = new List<string>();
-      NameSubType.Clear();
-      string subRoot = GlobalProperties.ROOTDIR + GlobalProperties.SOURCE + @"\" + GlobalProperties.TYPE;
+      string subRoot = $@"{RootDirectory}\{NameSourceDirectory}\{NameTypeDirectory}";
+
+      List<string> nameSubType = new List<string>();
       DirectoryInfo thisRoot = new DirectoryInfo(subRoot);
       DirectoryInfo[] subDir = thisRoot.GetDirectories();
 
@@ -91,67 +216,27 @@ namespace Mang
       {
         foreach (DirectoryInfo di in subDir)
         {
-          NameSubType.Add(di.ToString());
+          nameSubType.Add(di.ToString());
         }
-      } catch (Exception e)
+      }
+      catch (Exception e)
       {
         Console.Write(e);
       }
-      return NameSubType;
+      return nameSubType;
     }
 
-    public string FromPreset()
+    #endregion
+
+    #region INotifyPropertyChanged Impl
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
-      string curDir = GlobalProperties.ROOTDIR + GlobalProperties.SOURCE + @"\" + 
-                      GlobalProperties.TYPE + @"\" + GlobalProperties.SUBTYPE;
-
-      IEnumerable<string> txtFiles = Directory.EnumerateFiles(curDir, "*.*");
-      try
-      {
-        // if there are multiple input files in the subdir, just shove them all
-        // into one list
-        List<string> input = new List<string>();
-        foreach (string filePath in txtFiles)
-        {
-          input = (File.ReadAllLines(filePath).ToList());
-        }
-
-        NameGenerator ng = new NameGenerator(input);
-
-        List<string> output = ng.NameList;
-
-        return string.Join(Environment.NewLine, output);
-      } catch (Exception ex)
-      {
-        return ex.ToString();
-      }
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public string FromInput(string input)
-    {
-      char[] separator = { ' ', '\n', '\r' };
-
-      string[] userInput = input.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-
-      if (input.Length <= GlobalProperties.ORDER)
-      {
-        return "You can't generate names\n from an empty list.";
-      }
-
-      if (userInput.Length < 5)
-      {
-        return "Your list isn't long enough.\nMake sure it's at least 5 items long.";
-      }
-
-      try
-      {
-        NameGenerator ng = new NameGenerator(userInput);
-        List<string> markovOutput = ng.NameList;
-        return string.Join(Environment.NewLine, markovOutput);
-      } catch (Exception ex)
-      {
-        return ex.ToString();
-      }
-    }
+    #endregion
   }
 }

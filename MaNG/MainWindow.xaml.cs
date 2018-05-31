@@ -1,4 +1,4 @@
-﻿using MaNG;
+using MaNG;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,108 +18,67 @@ namespace Mang
       InitializeComponent();
       NameTools = new NameTools();
 
-      if (!string.IsNullOrEmpty(GlobalProperties.ROOTDIR))
-      {
-        NameTools.PopulateDropDowns();
-      }
-    }
-
-    private void NameSourceType_Loaded(object sender, RoutedEventArgs e)
-    {
-      var comboBox = sender as ComboBox;
-      try
-      {
-        comboBox.ItemsSource = NameTools.GetNameSource();
-      }
-      catch (Exception ex)
-      {
-        markovInputBox.AppendText(ex.ToString());
-      }
-      comboBox.SelectedIndex = 0;
+      DataContext = NameTools;
     }
 
     private void NameSourceType_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       var comboBox = sender as ComboBox;
-      GlobalProperties.SOURCE = comboBox.SelectedValue as string;
+      NameTools.NameSourceDirectory = comboBox.SelectedValue as string;
+
       try
       {
-        nameTypeCB.ClearValue(ItemsControl.ItemsSourceProperty);
-        nameTypeCB.ItemsSource = NameTools.GetNameType();
+        NameTools.RefreshNameTypes();
         nameTypeCB.SelectedIndex = 0;
       }
       catch (Exception ex)
       {
-        markovInputBox.AppendText(ex.ToString());
+        MessageBox.Show(ex.ToString());
       }
-    }
-
-    private void NameType_Loaded(object sender, RoutedEventArgs e)
-    {
-      var comboBox = sender as ComboBox;
-      comboBox.ItemsSource = NameTools.GetNameType();
-      comboBox.SelectedIndex = 0;
     }
 
     private void NameType_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       var comboBox = sender as ComboBox;
-      GlobalProperties.TYPE = comboBox.SelectedValue as string;
+      NameTools.NameTypeDirectory = comboBox.SelectedValue as string;
+
       try
       {
-        nameSubTypeCB.ClearValue(ItemsControl.ItemsSourceProperty);
-        nameSubTypeCB.ItemsSource = NameTools.GetNameSubType();
+        NameTools.RefreshNameSubTypes();
         nameSubTypeCB.SelectedIndex = 0;
       }
       catch (Exception ex)
       {
-        markovInputBox.AppendText(ex.ToString());
+        MessageBox.Show(ex.ToString());
       }
-    }
-
-    private void NameSubType_Loaded(object sender, RoutedEventArgs e)
-    {
-      var comboBox = sender as ComboBox;
-      comboBox.ItemsSource = NameTools.GetNameSubType();
-      comboBox.SelectedIndex = 0;
     }
 
     private void NameSubType_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       var comboBox = sender as ComboBox;
-      GlobalProperties.SUBTYPE = comboBox.SelectedValue as string;
-    }
-
-    private void OrderLength_Loaded(object sender, RoutedEventArgs e)
-    {
-      var comboBox = sender as ComboBox;
-      comboBox.ItemsSource = NameTools.OrderLength;
-      comboBox.SelectedIndex = 2;
+      NameTools.NameSubTypeDirectory = comboBox.SelectedValue as string;
     }
 
     private void OrderLength_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       var comboBox = sender as ComboBox;
-      GlobalProperties.ORDER = (int)comboBox.SelectedValue;
-    }
-
-    private void MinLength_Loaded(object sender, RoutedEventArgs e)
-    {
-      var comboBox = sender as ComboBox;
-      comboBox.ItemsSource = NameTools.MinLength;
-      comboBox.SelectedIndex = 1;
+      NameTools.TokenLength = (int)comboBox.SelectedValue;
     }
 
     private void Preset_Click(object sender, RoutedEventArgs e)
     {
-      markovOutputBox.Clear();
-      markovOutputBox.AppendText(NameTools.FromPreset());
+      NameTools.FromPreset();
     }
 
     private void UserInput_Click(object sender, RoutedEventArgs e)
     {
-      markovOutputBox.Clear();
-      markovOutputBox.AppendText(NameTools.FromInput(markovInputBox.Text));
+      try
+      {
+        NameTools.FromInput(markovInputBox.Text);
+      } catch (Exception ex)
+      {
+        MessageBox.Show(ex.ToString());
+      }
     }
 
     private void Info_Click(object sender, RoutedEventArgs e)
@@ -132,18 +91,6 @@ namespace Mang
     {
       HelpDialog helpDialog = new HelpDialog();
       helpDialog.ShowDialog();
-    }
-
-    private void ChooseDirectory_Click(object sender, RoutedEventArgs e)
-    {
-      RootDirPicker rdp = new RootDirPicker();
-      rdp.Owner = this;
-      rdp.ShowDialog();
-
-      if (!string.IsNullOrEmpty(GlobalProperties.ROOTDIR))
-      {
-        NameTools.PopulateDropDowns();
-      }
     }
   }
 }

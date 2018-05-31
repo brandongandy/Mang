@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -21,8 +21,8 @@ namespace Mang
 
       infoHeader.Text = "Mang\n" +
                         "A name generator app\n" +
-                        "Version - 1.0\n" +
-                        "Copyright © 2017 - Brandon Gandy\n" +
+                        "Version - 1.0.2.1\n" +
+                        "Copyright © 2018 - Brandon Gandy\n" +
                         "All rights reserved";
     }
 

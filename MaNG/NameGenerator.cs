@@ -1,25 +1,38 @@
-﻿using System;
+using MaNG;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Mang
 {
   public class NameGenerator
   {
-    private SecondMarkov markov;
-    private int listSize = 20;
+    #region Fields
+
+    private MarkovData markovData;
+    private readonly int listSize = 20;
     private List<string> stringsUsed = new List<string>();
-    private Random rand = new Random();
-    private int stringsUsedSized = 0;
 
-    public List<string> NameList;
+    private readonly int tokenLength;
+    private readonly TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
 
-    public NameGenerator(IEnumerable<string> input)
+    #endregion
+
+    #region Properties
+
+    public List<string> NameList { get; set; }
+
+    #endregion
+
+    public NameGenerator(IEnumerable<string> input, int tokenLength)
     {
-      markov = new SecondMarkov(input);
-      NameList = GetNextNames();
+      this.tokenLength = tokenLength;
+
+      markovData = new MarkovData(input, tokenLength);
+      NameList = GetNameList(listSize);
     }
 
-    private List<string> GetNextNames()
+    private List<string> GetNameList(int listSize)
     {
       List<string> names = new List<string>();
       for (int i = 0; i < listSize; i++)
@@ -45,68 +58,36 @@ namespace Mang
       // Only returns names that haven't been used yet, and names that begin
       // and end with letters (a lot of input has dashes or apostrophes)
 
-      do
+     
+      // get a random name from the input samples
+      // then generate a word length to aim at
+
+      int next = RandomNumber.Next(markovData.Samples.Count);
+      int minLength = tokenLength + 2;
+      int maxLength = RandomNumber.Next(minLength + tokenLength, markovData.Samples[next].Length + minLength);
+      int nameLength = RandomNumber.Next(minLength, maxLength);
+
+      // generate the next name: a random substring of the random sample name
+      // then get a random next letter based on the previous ngram
+
+      nextName = markovData.Samples[next].Substring(RandomNumber.Next(0, markovData.Samples[next].Length - tokenLength), tokenLength);
+
+      while (nextName.Length < nameLength)
       {
-        // get a random name from the input samples
-        // then generate a word length to aim at
-
-        int next = rand.Next(markov.samples.Count);
-        int minLength = GlobalProperties.ORDER + 2;
-        int maxLength = rand.Next(minLength + GlobalProperties.ORDER, markov.samples[next].Length + minLength);
-        int nameLength = rand.Next(minLength, maxLength);
-
-        // generate the next name: a random substring of the random sample name
-        // then get a random next letter based on the previous ngram
-
-        nextName = markov.samples[next].Substring(rand.Next(0, markov.samples[next].Length - GlobalProperties.ORDER), GlobalProperties.ORDER);
-        while (nextName.Length < nameLength)
+        string token = nextName.Substring(nextName.Length - tokenLength, tokenLength);
+        if (markovData.MarkovChain.ContainsKey(token))
         {
-          string token = nextName.Substring(nextName.Length - GlobalProperties.ORDER, GlobalProperties.ORDER);
-          if (markov.markovChain.ContainsKey(token))
-          {
-            nextName += NextLetter(token);
-          }
-          else
-          {
-            break;
-          }
-        }
-
-        // Capitalize the first letter of the name, or the first letter of the parts
-        // of the name if there's a space in there
-
-        if (nextName.Contains(" "))
-        {
-          string[] tokens = nextName.Split(' ');
-          nextName = "";
-          for (int t = 0; t < tokens.Length; t++)
-          {
-            if (tokens[t] == "") { continue; }
-
-            if (tokens[t].Length == 1)
-            {
-              tokens[t] = tokens[t].ToUpper();
-            }
-            else
-            {
-              tokens[t] = tokens[t].Substring(0, 1) + tokens[t].Substring(1).ToLower();
-            }
-
-            if (nextName != "") { nextName += " "; }
-
-            nextName += tokens[t];
-          }
+          nextName += NextLetter(token);
         }
         else
         {
-          nextName = nextName.Substring(0, 1) + nextName.Substring(1).ToLower();
+          break;
         }
-      } while (stringsUsed.Contains(nextName)
-               || !char.IsLetter(nextName[0])
-               || !char.IsLetter(nextName[nextName.Length - 1]));
+      }
+
+      nextName = textInfo.ToTitleCase(nextName.ToLower());
+
       stringsUsed.Add(nextName);
-      stringsUsedSized++;
-      if (stringsUsedSized > 2) { stringsUsed.Clear(); }
 
       return nextName;
     }
@@ -116,8 +97,8 @@ namespace Mang
       // get all the letters that come after the passed-in token
       // then pick a random one and return it
 
-      List<char> letters = markov.markovChain[token];
-      int nextLetter = rand.Next(letters.Count);
+      List<char> letters = markovData.MarkovChain[token];
+      int nextLetter = RandomNumber.Next(letters.Count);
       return letters[nextLetter];
     }
   }
